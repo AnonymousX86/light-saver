@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { useImagesStore } from "@/stores/images";
+
 const props = defineProps<{
   imgSrc: String;
 }>();
+
+const store = useImagesStore();
 
 async function copyLink() {
   try {
@@ -12,6 +16,10 @@ async function copyLink() {
   }
   alert("Copied to clipboard!");
 }
+
+const remove = () => {
+  store.remove(props.imgSrc.toString());
+};
 </script>
 
 <template>
@@ -25,6 +33,7 @@ async function copyLink() {
         <a :href="props.imgSrc.toString()">Open</a>
       </div>
       <div class="media-item__overlay__button" @click="copyLink">Copy</div>
+      <div class="media-item__overlay__button media-item__overlay__button--remove" @click="remove">Remove</div>
     </div>
   </div>
 </template>
@@ -75,6 +84,11 @@ async function copyLink() {
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease-out;
+
+      &--remove {
+        border-color: $red;
+        color: $red;
+      }
 
       &:hover {
         opacity: 0.9;

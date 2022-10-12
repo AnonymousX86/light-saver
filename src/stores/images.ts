@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { ref, watch } from "vue";
 import type { Ref } from "vue";
+import { ref, watch } from "vue";
 
 export const useImagesStore = defineStore("images", () => {
   const images = ref<String[]>([]);
@@ -10,6 +10,17 @@ export const useImagesStore = defineStore("images", () => {
       return;
     }
     images.value.push(src);
+  }
+
+  function remove(src: String) {
+    if (!images.value.includes(src)) {
+      alert("Image doesn't exists");
+      return;
+    }
+    const imagesCopy = images.value.slice();
+    images.value = imagesCopy.filter((x) => {
+      return x !== src;
+    });
   }
 
   const imagesFromStorage = localStorage.getItem("images");
@@ -25,5 +36,5 @@ export const useImagesStore = defineStore("images", () => {
     { deep: true }
   );
 
-  return { images, add };
+  return { images, add, remove };
 });
