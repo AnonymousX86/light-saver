@@ -33,7 +33,12 @@ const remove = () => {
         <a :href="props.imgSrc.toString()">Open</a>
       </div>
       <div class="media-item__overlay__button" @click="copyLink">Copy</div>
-      <div class="media-item__overlay__button media-item__overlay__button--remove" @click="remove">Remove</div>
+      <div
+        class="media-item__overlay__button media-item__overlay__button--remove"
+        @click="remove"
+      >
+        Remove
+      </div>
     </div>
   </div>
 </template>
