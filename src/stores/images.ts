@@ -12,6 +12,17 @@ export const useImagesStore = defineStore("images", () => {
     images.value.push(src);
   }
 
+  function remove(src: String) {
+    if (!images.value.includes(src)) {
+      alert("Image doesn't exists");
+      return;
+    }
+    const imagesCopy = images.value.slice();
+    images.value = imagesCopy.filter((x) => {
+      return x !== src;
+    });
+  }
+
   const imagesFromStorage = localStorage.getItem("images");
   if (imagesFromStorage) {
     images.value = JSON.parse(imagesFromStorage);
@@ -25,5 +36,5 @@ export const useImagesStore = defineStore("images", () => {
     { deep: true }
   );
 
-  return { images, add };
+  return { images, add, remove };
 });
