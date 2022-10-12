@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import type { Ref } from "vue";
 import { ref, watch } from "vue";
+import type { Ref } from "vue";
 
 export const useImagesStore = defineStore("images", () => {
   const images = ref<String[]>([]);
